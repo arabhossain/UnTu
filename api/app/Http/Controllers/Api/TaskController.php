@@ -10,22 +10,11 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-       $tasks = Task::createdInFiveMinutes()->pending()->get();//
-
-        return new TaskCollection($tasks);
+        return new TaskCollection(Task::createdInFiveMinutes()->pending()->get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
        $data = $request->only(['details']);
@@ -34,11 +23,6 @@ class TaskController extends Controller
        return $this->index();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Task $task)
     {
         $task->delete();
