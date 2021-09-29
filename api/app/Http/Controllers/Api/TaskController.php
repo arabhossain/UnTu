@@ -16,7 +16,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-       $tasks = Task::pending()->get();//createdInFiveMinutes()
+       $tasks = Task::createdInFiveMinutes()->pending()->get();//
 
         return new TaskCollection($tasks);
     }
